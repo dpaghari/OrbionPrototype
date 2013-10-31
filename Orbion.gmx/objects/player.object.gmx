@@ -29,9 +29,9 @@
 global.playerAmmo = 10;
 max_Ammo = 10;
 build_mode = false;
-reloading = false;
+global.reloading = false;
 reloadTimer = 0;
-reloadTime = 60 * 2;
+reloadTime = 60;
 res = 0;
 firingTimer = 0;
 rate = 5;
@@ -61,15 +61,21 @@ rate = 5;
             <string>shootAngle = point_direction(player.x, player.y, mouse_x, mouse_y);                            // player rotation
 firingTimer++;
 
-if(reloading == true)
+if(global.playerAmmo == 0)
+{
+global.reloading = true;
+}
+
+if(global.reloading == true)
 {
     reloadTimer++;
+   
 }
 if(reloadTimer &gt; reloadTime)
 {
     global.playerAmmo = max_Ammo;
     reloadTimer = 0;
-    reloading = false;
+    global.reloading = false;
 }
 </string>
           </argument>
@@ -358,6 +364,7 @@ if(reloadTimer &gt; reloadTime)
           <argument>
             <kind>1</kind>
             <string>var bull;
+if(!global.reloading){
 if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 // spaces out bullets so you don't spam
             {
                 global.playerAmmo -= 1;
@@ -366,7 +373,7 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 bull.direction = shootAngle;
                 firingTimer = 0;
             }
-
+}
 </string>
           </argument>
         </arguments>
@@ -389,7 +396,9 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>reloading = true;
+            <string>if(global.playerAmmo != max_Ammo){
+global.reloading = true;
+}
 
 </string>
           </argument>
