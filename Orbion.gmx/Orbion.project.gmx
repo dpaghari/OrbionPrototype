@@ -6,20 +6,33 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\player_spr</sprite>
     <sprite>sprites\lab</sprite>
     <sprite>sprites\generator</sprite>
     <sprite>sprites\medbay</sprite>
     <sprite>sprites\bullet</sprite>
+    <sprites name="player">
+      <sprite>sprites\player_spr</sprite>
+      <sprite>sprites\player_rund</sprite>
+      <sprite>sprites\player_runs</sprite>
+      <sprite>sprites\player_runu</sprite>
+      <sprite>sprites\player_stands</sprite>
+      <sprite>sprites\player_standu</sprite>
+    </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\terrain</background>
+  </backgrounds>
   <paths name="paths"/>
+  <fonts name="fonts">
+    <font>fonts\hudfont</font>
+  </fonts>
   <objects name="objects">
     <object>objects\player</object>
     <object>objects\obj_generator</object>
     <object>objects\obj_medbay</object>
     <object>objects\obj_lab</object>
     <object>objects\obj_bullet</object>
+    <object>objects\obj_HUDcontroller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
