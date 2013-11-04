@@ -92,12 +92,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(view_xview + 3, 50, "HP: ");
-draw_text(view_xview + 100, 50, global.playerHealth);
-draw_text(view_xview + 200, 50, "Ammo: ");
-draw_text(view_xview + 300, 50, global.playerAmmo);
-draw_text(view_xview + 400, 50, "Gold: ");
-draw_text(view_xview + 500, 50, global.playerGold);
+            <string>draw_text(view_xview + 3, view_yview, "HP: ");
+draw_text(view_xview + 100, view_yview, global.playerHealth);
+draw_text(view_xview + 200, view_yview, "Ammo: ");
+draw_text(view_xview + 300, view_yview, global.playerAmmo);
+draw_text(view_xview + 400, view_yview, "Gold: ");
+draw_text(view_xview + 500, view_yview, global.playerGold);
 if(global.reloading)
 {
 draw_text(player.x - 30, player.y - 50, "Reloading");
