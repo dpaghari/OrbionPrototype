@@ -23,6 +23,7 @@
     <sprite>sprites\drill</sprite>
     <sprite>sprites\build_card1</sprite>
     <sprite>sprites\spr_enemy</sprite>
+    <sprite>sprites\spr_barrier</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\terrain</background>
@@ -42,6 +43,7 @@
     <object>objects\obj_drill</object>
     <object>objects\obj_buildcard</object>
     <object>objects\obj_enemy</object>
+    <object>objects\obj_barrier</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

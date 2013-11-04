@@ -157,10 +157,12 @@ if(global.playerHealth &lt;= 0){
             <kind>1</kind>
             <string>if(!global.isDead)
 {
+    if(place_free(player.x, player.y - 10)){
     player.y -= 10;
     player.sprite_index = player_runu;
     image_speed = 0.3;
     view_yview -= 10;
+    }
 }
 
 
@@ -192,10 +194,12 @@ if(global.playerHealth &lt;= 0){
             <kind>1</kind>
             <string>if(!global.isDead)
 {
+    if(place_free(player.x, player.y + 10)){
     player.y += 10;   
     player.sprite_index = player_rund;
     image_speed = 0.3;
     view_yview += 10;
+    }
 }
 
 
@@ -227,12 +231,14 @@ if(global.playerHealth &lt;= 0){
             <kind>1</kind>
             <string>if(!global.isDead)
 {
+    if(place_free(player.x - 10, player.y)){
     player.x += 10;
     player.sprite_index = player_runs;
     image_speed = 0.3;
     image_xscale = -1;
     
     view_xview += 10;
+    }
 }
 
 
@@ -264,11 +270,13 @@ if(global.playerHealth &lt;= 0){
             <kind>1</kind>
             <string>if(!global.isDead)
 {
-    player.x -= 10;
-    player.sprite_index = player_runs;
-    image_speed = 0.3;
-    image_xscale = 1;   
-    view_xview -= 10;
+    if(place_free(player.x - 10, player.y)){
+        player.x -= 10;
+        player.sprite_index = player_runs;
+        image_speed = 0.3;
+        image_xscale = 1;   
+        view_xview -= 10;
+    }
     
 }
 
@@ -300,6 +308,7 @@ if(global.playerHealth &lt;= 0){
           <argument>
             <kind>1</kind>
             <string>var bull;
+if(!global.isDead){
 if(!global.reloading){
 if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 // spaces out bullets so you don't spam
             {
@@ -309,6 +318,7 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 bull.direction = shootAngle;
                 firingTimer = 0;
             }
+}
 }
 </string>
           </argument>
