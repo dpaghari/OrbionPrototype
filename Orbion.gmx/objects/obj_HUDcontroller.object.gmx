@@ -105,6 +105,11 @@ if(global.reloading)
 {
 draw_text(player.x - 30, player.y - 50, "Reloading");
 }
+
+if(global.isDead)
+{
+draw_text(player.x - 30, player.y - 50, "You are DEAD");
+}
 </string>
           </argument>
         </arguments>

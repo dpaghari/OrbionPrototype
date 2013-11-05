@@ -83,7 +83,8 @@ if(reloadTimer &gt; reloadTime)
 }
 
 if(global.playerHealth &lt;= 0){
-    //instance_destroy();    
+    //instance_destroy();
+    global.playerHealth = 0;    
     global.isDead = true;
     sprite_index = spr_player_death;
 }

@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>enemy_health = 10;
 enemy_firing_timer = 0;
-enemy_rate = 10;
+enemy_rate = 20;
 </string>
           </argument>
         </arguments>
