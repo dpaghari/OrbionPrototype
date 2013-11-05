@@ -48,6 +48,29 @@ resource_timer = 0;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.playerBulPerShot++;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -315,7 +338,7 @@ if(global.playerHealth &lt;= 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.cant_afford = false;
+            <string>global.playerGold += 50;
 </string>
           </argument>
         </arguments>
@@ -429,7 +452,7 @@ global.reloading = true;
           <argument>
             <kind>1</kind>
             <string>if( instance_exists (obj_labUpgrCard))
-    global.playerBulPerShot++;
+    alarm[0] = 5*30;
 </string>
           </argument>
         </arguments>
