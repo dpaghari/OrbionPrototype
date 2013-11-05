@@ -142,7 +142,7 @@ draw_set_color(c_aqua);
 draw_text(view_xview + 600, view_yview, "Energy: ");
 draw_text(view_xview + 700, view_yview, global.playerEnergy);
 
-if(player.alarm[0] &gt; 0)
+if(player.alarm[0] &gt; 0 || player.alarm[1] &gt; 0)
 {
     draw_set_color(c_green);
     draw_text(player.x - 30, player.y - 75, "Researching");

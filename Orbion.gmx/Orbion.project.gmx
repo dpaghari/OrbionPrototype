@@ -25,6 +25,9 @@
     <sprite>sprites\upgr_card1</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_barrier</sprite>
+    <sprite>sprites\spr_orbShot1</sprite>
+    <sprite>sprites\spr_orbShot2</sprite>
+    <sprite>sprites\spr_orbShot3</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\terrain</background>
@@ -39,6 +42,7 @@
     <object>objects\obj_medbay</object>
     <object>objects\obj_lab</object>
     <object>objects\obj_bullet</object>
+    <object>objects\obj_orbShot</object>
     <object>objects\obj_enemy_bullet</object>
     <object>objects\obj_HUDcontroller</object>
     <object>objects\obj_drill</object>

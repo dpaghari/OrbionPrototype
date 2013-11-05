@@ -55,7 +55,7 @@ enemy_rate = 20;
 if(instance_exists(player)){
   if(!global.isDead){
     if(distance_to_object(player) &gt; 350){
-        move_towards_point(player.x, player.y, 10);
+        move_towards_point(player.x, player.y, 3);
     } else if(enemy_firing_timer &gt; enemy_rate){
         speed = 0;
         temp_bullet = instance_create(x, y, obj_enemy_bullet);
@@ -64,6 +64,32 @@ if(instance_exists(player)){
   }
 }
 enemy_firing_timer++;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_orbShot">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>enemy_health -= 2;
+if(enemy_health == 0){
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
