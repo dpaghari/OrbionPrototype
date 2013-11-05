@@ -28,7 +28,7 @@
             <string>global.playerHealth = 100;
 global.playerAmmo = 10;
 global.isDead = false;
-global.playerBulPerShot = 9;
+global.playerBulPerShot = 2;
 playerMaxScatterAngle = 35;
 
 max_Ammo = 10;
@@ -83,7 +83,7 @@ if(reloadTimer &gt; reloadTime)
 }
 
 if(global.playerHealth &lt;= 0){
-    //instance_destroy();
+    //instance_destroy();    
     global.isDead = true;
     sprite_index = spr_player_death;
 }

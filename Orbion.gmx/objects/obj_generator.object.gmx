@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>inProximity = false;
+global.playerEnergy += 10;
 </string>
           </argument>
         </arguments>

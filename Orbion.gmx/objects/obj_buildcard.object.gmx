@@ -31,7 +31,7 @@ instance_destroy();
 }
 
 obj_buildcard.x = player.x + 410;
-obj_buildcard.y = player.y + 200; 
+obj_buildcard.y = player.y + 180; 
 </string>
           </argument>
         </arguments>

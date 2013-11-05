@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.playerGold = 0;
+global.playerEnergy = 0;
 </string>
           </argument>
         </arguments>
@@ -98,6 +99,8 @@ draw_text(view_xview + 200, view_yview, "Ammo: ");
 draw_text(view_xview + 300, view_yview, global.playerAmmo);
 draw_text(view_xview + 400, view_yview, "Gold: ");
 draw_text(view_xview + 500, view_yview, global.playerGold);
+draw_text(view_xview + 600, view_yview, "Energy: ");
+draw_text(view_xview + 700, view_yview, global.playerEnergy);
 if(global.reloading)
 {
 draw_text(player.x - 30, player.y - 50, "Reloading");
