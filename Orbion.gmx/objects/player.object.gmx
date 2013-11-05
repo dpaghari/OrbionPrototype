@@ -35,6 +35,8 @@ max_Ammo = 10;
 global.build_mode = false;
 global.reloading = false;
 global.labUpgr_mode = false;
+global.orbShot = false;
+global.orbRank = 0;
 reloadTimer = 0;
 reloadTime = 60;
 res = 0;
@@ -315,7 +317,8 @@ if(global.playerHealth &lt;= 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.cant_afford = false;
+            <string>global.playerGold += 100;
+global.playerEnergy += 100;
 </string>
           </argument>
         </arguments>
@@ -360,9 +363,15 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 global.playerAmmo -= 1;
                 for(var currBul = 1; currBul &lt;=global.playerBulPerShot; currBul++)
                 {
-
+                    if(!global.orbShot){
                     bull = instance_create(player.x, player.y, obj_bullet);
+                    
                     bull.speed = 20;
+                    }
+                    else{
+                    bull = instance_create(player.x, player.y, obj_orbShot);
+                    bull.speed = 10;
+                    }
                     var angleOffset = playerMaxScatterAngle/2 - playerMaxScatterAngle/(global.playerBulPerShot + 1)*currBul;
                     bull.direction = shootAngle + angleOffset;
                     
@@ -428,8 +437,13 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( instance_exists (obj_labUpgrCard))
+            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 50){
+global.playerGold -= 200;
+global.playerEnergy -= 50;
+if( instance_exists (obj_labUpgrCard))
     global.playerBulPerShot++;
+}
+    
 </string>
           </argument>
         </arguments>
@@ -554,6 +568,46 @@ global.reloading = true;
 
 
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="69">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 50){
+global.playerGold -= 200;
+global.playerEnergy -= 50;
+if( instance_exists (obj_labUpgrCard))
+    global.orbShot = true;
+    
+}
+
+if(global.orbRank &lt; 3 ){
+    global.orbRank++;
+}
+else{
+    global.orbRank = 3;
+}
+    
+
+    
 
 </string>
           </argument>
