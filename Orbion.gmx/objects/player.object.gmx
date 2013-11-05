@@ -30,7 +30,7 @@ global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 2;
 playerMaxScatterAngle = 35;
-
+global.cant_afford = false;
 max_Ammo = 10;
 global.build_mode = false;
 global.reloading = false;
@@ -39,6 +39,8 @@ reloadTime = 60;
 res = 0;
 firingTimer = 0;
 rate = 5;
+resource_rate = 40;
+resource_timer = 0;
 
 </string>
           </argument>
@@ -64,6 +66,7 @@ rate = 5;
             <kind>1</kind>
             <string>shootAngle = point_direction(player.x, player.y, mouse_x, mouse_y);                            // player rotation
 firingTimer++;
+resource_timer++;
 
 if(global.playerAmmo == 0)
 {
@@ -87,6 +90,14 @@ if(global.playerHealth &lt;= 0){
     global.playerHealth = 0;    
     global.isDead = true;
     sprite_index = spr_player_death;
+}
+
+if(global.cant_afford)
+{
+    if(resource_timer &gt; resource_rate)
+    {
+    global.cant_afford = false;
+    }
 }
 </string>
           </argument>
@@ -404,6 +415,11 @@ global.reloading = true;
 global.playerGold -= 100;
 instance_create(player.x, player.y, obj_medbay);
 global.build_mode = false;
+global.cant_afford = false;
+}
+else
+{
+global.cant_afford = true;
 }
 
 
@@ -435,6 +451,11 @@ global.build_mode = false;
 global.playerGold -= 100;
 instance_create(player.x, player.y, obj_lab);
 global.build_mode = false;
+global.cant_afford = false;
+}
+else
+{
+global.cant_afford = true;
 }
 
 
@@ -466,7 +487,13 @@ global.build_mode = false;
 global.playerGold -= 50;
 instance_create(player.x, player.y, obj_generator);
 global.build_mode = false;
+global.cant_afford = false;
 }
+else
+{
+global.cant_afford = true;
+}
+
 
 
 
