@@ -398,7 +398,7 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode  &amp;&amp; global.playerGold &gt;= 100)
+            <string>if(global.build_mode  &amp;&amp; global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 10)
 {
 global.playerGold -= 100;
 instance_create(player.x, player.y, obj_medbay);
@@ -429,7 +429,7 @@ global.build_mode = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode  &amp;&amp; global.playerGold &gt;= 100)
+            <string>if(global.build_mode  &amp;&amp; global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
 {
 global.playerGold -= 100;
 instance_create(player.x, player.y, obj_lab);
