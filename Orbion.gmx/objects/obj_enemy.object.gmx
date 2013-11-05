@@ -54,7 +54,7 @@ enemy_rate = 20;
 
 if(instance_exists(player)){
   if(!global.isDead){
-    if(distance_to_object(player) &gt; 150){
+    if(distance_to_object(player) &gt; 350){
         move_towards_point(player.x, player.y, 10);
     } else if(enemy_firing_timer &gt; enemy_rate){
         speed = 0;

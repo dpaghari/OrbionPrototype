@@ -28,7 +28,7 @@
             <string>global.playerHealth = 100;
 global.playerAmmo = 10;
 global.isDead = false;
-global.playerBulPerShot = 2;
+global.playerBulPerShot = 1;
 playerMaxScatterAngle = 35;
 global.cant_afford = false;
 max_Ammo = 10;
@@ -93,13 +93,7 @@ if(global.playerHealth &lt;= 0){
     sprite_index = spr_player_death;
 }
 
-if(global.cant_afford)
-{
-    if(resource_timer &gt; resource_rate)
-    {
-    global.cant_afford = false;
-    }
-}
+
 </string>
           </argument>
         </arguments>
