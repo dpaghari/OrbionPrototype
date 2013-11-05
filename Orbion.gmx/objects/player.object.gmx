@@ -34,6 +34,7 @@ playerMaxScatterAngle = 35;
 max_Ammo = 10;
 global.build_mode = false;
 global.reloading = false;
+global.labUpgr_mode = false;
 reloadTimer = 0;
 reloadTime = 60;
 res = 0;
@@ -382,6 +383,30 @@ global.reloading = true;
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="81">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if( instance_exists (obj_labUpgrCard))
+    global.playerBulPerShot++;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="77">
       <action>
         <libid>1</libid>
@@ -492,11 +517,30 @@ global.build_mode = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.build_mode = true;
+            <string>
 
-if(global.build_mode){    
-    instance_create(view_xview - 200, view_yview + 250, obj_buildcard); 
+upgrCardOff = false;
+
+if (instance_exists (obj_lab)){
+    if (obj_lab.inProximity){
+        global.labUpgr_mode = !global.labUpgr_mode;
+        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard); 
+    }
+    else{
+        global.labUpgr_mode = false;
+    }
 }
+
+if (!global.labUpgr_mode &amp;&amp; !upgrCardOff)
+{
+    global.labUpgr_mode = false;
+    global.build_mode = not global.build_mode;
+    
+    if(global.build_mode){    
+        instance_create(view_xview - 200, view_yview + 250, obj_buildcard); 
+    }
+}
+
 
 
 </string>
