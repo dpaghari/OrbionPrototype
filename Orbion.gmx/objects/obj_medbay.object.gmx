@@ -51,7 +51,10 @@
             <string>if (point_distance(x, y, player.x, player.y) &lt; 100)
                     {
                         inProximity = true;
-
+                        if(global.playerHealth &lt; 100){
+                            global.playerHealth += 1;
+                        }
+                        
                     }
                     else
                     {
