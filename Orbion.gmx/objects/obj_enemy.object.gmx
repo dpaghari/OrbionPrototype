@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enemy_health = 5;
+            <string>enemy_health = 8;
 enemy_firing_timer = 0;
 enemy_rate = 20;
 </string>
@@ -87,7 +87,7 @@ enemy_firing_timer++;
           <argument>
             <kind>1</kind>
             <string>enemy_health -= 2;
-if(enemy_health == 0){
+if(enemy_health &lt;= 0){
     instance_destroy();
 }
 </string>
@@ -113,7 +113,7 @@ if(enemy_health == 0){
           <argument>
             <kind>1</kind>
             <string>enemy_health -= 1;
-if(enemy_health == 0){
+if(enemy_health &lt;= 0){
     instance_destroy();
 }
 </string>
