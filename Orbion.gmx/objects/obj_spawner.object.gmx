@@ -48,7 +48,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var numspawn = 1000;
+            <string>var numspawn = 600;
 
 //if(!instance_exists(obj_enemy)){
 if(spawn_timer &gt;= numspawn){
