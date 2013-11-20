@@ -21,6 +21,7 @@
       <sprite>sprites\spr_player_death</sprite>
     </sprites>
     <sprite>sprites\drill</sprite>
+    <sprite>sprites\spr_oilwell</sprite>
     <sprite>sprites\build_card1</sprite>
     <sprite>sprites\upgr_card1</sprite>
     <sprite>sprites\spr_enemy</sprite>
@@ -53,6 +54,7 @@
     <object>objects\obj_enemy</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_barrier</object>
+    <object>objects\obj_oilwell</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

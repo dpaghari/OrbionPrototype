@@ -547,6 +547,53 @@ global.reloading = true;
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="78">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.build_mode) 
+{
+    if (instance_exists (obj_oilwell)){
+        var anOilWell = instance_nearest(player.x, player.y, obj_oilwell);
+        if (anOilWell.inProximity){
+            if( global.playerGold &gt;= 100)
+            {
+                global.playerGold -= 100;
+                instance_create(anOilWell.x, anOilWell.y, obj_drill);
+                with(anOilWell){instance_destroy()}
+                global.build_mode = false;
+                global.cant_afford = false;
+            }
+            else
+            {
+                global.cant_afford = true;
+                obj_HUDcontroller.alarm[0] = 40;
+            }
+        }
+    }
+}
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="77">
       <action>
         <libid>1</libid>
