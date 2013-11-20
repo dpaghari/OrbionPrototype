@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enemy_health = 8;
+            <string>enemy_health = 10;
 enemy_firing_timer = 0;
 enemy_rate = 20;
 </string>
@@ -64,6 +64,8 @@ if(instance_exists(player)){
   }
 }
 enemy_firing_timer++;
+
+image_speed = 0.3;
 </string>
           </argument>
         </arguments>
@@ -89,6 +91,7 @@ enemy_firing_timer++;
             <string>enemy_health -= 2;
 if(enemy_health &lt;= 0){
     instance_destroy();
+    global.killCount += 1;
 }
 </string>
           </argument>
@@ -115,6 +118,7 @@ if(enemy_health &lt;= 0){
             <string>enemy_health -= 1;
 if(enemy_health &lt;= 0){
     instance_destroy();
+    global.killCount += 1;
 }
 </string>
           </argument>
