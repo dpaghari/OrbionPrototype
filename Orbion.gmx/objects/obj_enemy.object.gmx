@@ -52,6 +52,15 @@ enemy_rate = 20;
             <kind>1</kind>
             <string>var temp_bullet;
 
+if (obj_HUDcontroller.alarm[1] == 4*60*room_speed)
+enemy_health = 12;
+
+if (obj_HUDcontroller.alarm[1] == 2*60*room_speed)
+enemy_health = 16;
+
+if (obj_HUDcontroller.alarm[1] == 1*60*room_speed)
+enemy_health = 18;
+
 if(instance_exists(player)){
   if(!global.isDead){
     if(distance_to_object(player) &gt; 350){
@@ -88,11 +97,28 @@ image_speed = 0.3;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enemy_health -= 2;
+            <string>
+if(global.orbRank == 1)
+{
+enemy_health -= 2;
+}
+
+if(global.orbRank == 2)
+{
+enemy_health -= 3;
+}
+
+if(global.orbRank == 3)
+{
+enemy_health -= 4;
+}
+
 if(enemy_health &lt;= 0){
     instance_destroy();
     global.killCount += 1;
 }
+
+
 </string>
           </argument>
         </arguments>

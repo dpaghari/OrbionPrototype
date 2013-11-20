@@ -470,6 +470,7 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
     if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
     {
         global.playerGold -= 100;
+        global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_deflab);
         global.build_mode = false;
         global.cant_afford = false;
@@ -568,6 +569,7 @@ global.reloading = true;
     if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 10)
     {
         global.playerGold -= 100;
+        global.playerEnergy -= 10;
         instance_create(player.x, player.y, obj_medbay);
         global.build_mode = false;
         global.cant_afford = false;
@@ -609,6 +611,7 @@ global.reloading = true;
     if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
     {
         global.playerGold -= 100;
+        global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_lab);
         global.build_mode = false;
         global.cant_afford = false;
