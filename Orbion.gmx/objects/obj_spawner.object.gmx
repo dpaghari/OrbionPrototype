@@ -51,6 +51,11 @@
             <kind>1</kind>
             <string>var numspawn = 600;
 
+
+if (obj_HUDcontroller.alarm[1] &lt; 4.5*60*room_speed)
+    numspawn = 0;
+
+
 //if(!instance_exists(obj_enemy)){
 if(spawn_timer &gt;= numspawn){
     spawn_timer = 0;
@@ -62,6 +67,7 @@ if(spawn_timer &gt;= numspawn){
 
     spawn_timer++;
 }
+
 </string>
           </argument>
         </arguments>
