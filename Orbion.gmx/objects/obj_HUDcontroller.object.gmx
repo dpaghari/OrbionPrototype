@@ -149,7 +149,7 @@ global.killCount = 0;
           </argument>
           <argument>
             <kind>0</kind>
-            <string>20</string>
+            <string>50</string>
           </argument>
           <argument>
             <kind>4</kind>
@@ -173,7 +173,7 @@ global.killCount = 0;
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>50</string>
+            <string>25</string>
           </argument>
           <argument>
             <kind>4</kind>
@@ -275,11 +275,11 @@ if(player.alarm[0] &gt; 0 || player.alarm[1] &gt; 0)
 }
 
 draw_set_color(c_white);
-draw_text(view_xview + 800, view_yview + 30, "Kill 20 Aliens");
+draw_text(view_xview + 800, view_yview + 30, "Kill 50 Aliens");
 draw_text(view_xview + 800, view_yview, "Time Remaining: " + string(round(alarm[1]/room_speed)));
 draw_text(view_xview + 800, view_yview + 60, "Kills: ");
 draw_text(view_xview + 850, view_yview + 60, global.killCount);
-if(global.killCount == 20)
+if(global.killCount == 50)
 {
 draw_text(view_xview + 500, view_yview + 400, "MISSION SUCCESS");
 
