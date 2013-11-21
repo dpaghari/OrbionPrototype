@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>rate = 50;
 goldTimer = 0;
-hp = 600;
+hp = 700;
 </string>
           </argument>
         </arguments>

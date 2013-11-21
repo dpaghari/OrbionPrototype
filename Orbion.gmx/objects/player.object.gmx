@@ -31,7 +31,7 @@ global.isDead = false;
 global.playerBulPerShot = 1;
 playerMaxScatterAngle = 35;
 global.cant_afford = false;
-max_Ammo = 10;
+max_Ammo = 14;
 global.build_mode = false;
 global.reloading = false;
 global.labUpgr_mode = false;
@@ -44,6 +44,7 @@ firingTimer = 0;
 rate = 5;
 resource_rate = 40;
 resource_timer = 0;
+facing = "down";
 
 </string>
           </argument>
@@ -196,7 +197,23 @@ if(global.playerHealth &lt;= 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.playerHealth -= 10;
+            <string>if(facing == "down")
+player.sprite_index = player_hurt;
+
+if(facing == "left")
+player.sprite_index = player_hurt_side;
+
+if(facing == "right")
+player.sprite_index = player_hurt_side;
+
+if(facing == "up")
+player.sprite_index = player_shoot_back;
+
+
+
+global.playerHealth -= 10;
+
+
 </string>
           </argument>
         </arguments>
@@ -224,6 +241,7 @@ if(global.playerHealth &lt;= 0){
     if(place_free(player.x, player.y - 10)){
     player.y -= 10;
     player.sprite_index = player_runu;
+    facing = "up";
     image_speed = 0.3;
     view_yview -= 10;
     }
@@ -262,6 +280,7 @@ if(global.playerHealth &lt;= 0){
     player.y += 10;   
     player.sprite_index = player_rund;
     image_speed = 0.3;
+    facing = "down";
     view_yview += 10;
     }
 }
@@ -299,8 +318,8 @@ if(global.playerHealth &lt;= 0){
     player.x += 10;
     player.sprite_index = player_runs;
     image_speed = 0.3;
-    image_xscale = -1;
-    
+    facing = "right";
+    image_xscale = -1; 
     view_xview += 10;
     }
 }
@@ -338,7 +357,8 @@ if(global.playerHealth &lt;= 0){
         player.x -= 10;
         player.sprite_index = player_runs;
         image_speed = 0.3;
-        image_xscale = 1;   
+        facing = "left";  
+        image_xscale = 1; 
         view_xview -= 10;
     }
     
@@ -440,6 +460,18 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 bull.direction = shootAngle;
                 firingTimer = 0;
                 */
+                if(facing == "down")
+                player.sprite_index = player_shoot;
+                
+                if(facing == "left")
+                player.sprite_index = player_shoot_side;
+                
+                if(facing == "right")
+                player.sprite_index = player_shoot_side;
+                
+                if(facing == "up")
+                player.sprite_index = player_shoot_back;
+                
             }
 }
 }
@@ -613,6 +645,7 @@ global.reloading = true;
             <kind>1</kind>
             <string>if(global.build_mode)
 {
+    if(!instance_exists(obj_medbay)){
     if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 10)
     {
         global.playerGold -= 100;
@@ -625,6 +658,7 @@ global.reloading = true;
     {
         global.cant_afford = true;
         obj_HUDcontroller.alarm[0] = 40;
+    }
     }
 }
 

@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enemy_health = 10;
+            <string>enemy_health = 8;
 enemy_firing_timer = 0;
 enemy_rate = 20;
 </string>
@@ -53,13 +53,13 @@ enemy_rate = 20;
             <string>var temp_bullet;
 
 if (obj_HUDcontroller.alarm[1] == 4*60*room_speed)
-enemy_health = 12;
+enemy_health = 10;
 
 if (obj_HUDcontroller.alarm[1] == 2*60*room_speed)
-enemy_health = 16;
+enemy_health = 12;
 
 if (obj_HUDcontroller.alarm[1] == 1*60*room_speed)
-enemy_health = 20;
+enemy_health = 14;
 
 /*
 if(instance_exists(player)){

@@ -19,6 +19,12 @@
       <sprite>sprites\player_stands</sprite>
       <sprite>sprites\player_standu</sprite>
       <sprite>sprites\spr_player_death</sprite>
+      <sprite>sprites\player_shoot</sprite>
+      <sprite>sprites\player_shoot_back</sprite>
+      <sprite>sprites\player_shoot_side</sprite>
+      <sprite>sprites\player_hurt</sprite>
+      <sprite>sprites\player_hurt_side</sprite>
+      <sprite>sprites\player_hurt_back</sprite>
     </sprites>
     <sprite>sprites\drill</sprite>
     <sprite>sprites\spr_oilwell</sprite>
