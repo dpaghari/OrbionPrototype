@@ -81,6 +81,16 @@ var target = player;
 if (distance_to_object(drillTarget) &lt; distance_to_object(target))
     target = drillTarget;
 
+var bulletSpeed = 8;
+if (obj_HUDcontroller.alarm[1] &lt; 4*60*room_speed)
+bulletSpeed = 10;
+if (obj_HUDcontroller.alarm[1] &lt; 2*60*room_speed)
+bulletSpeed = 12;
+
+if (obj_HUDcontroller.alarm[1] &lt; 0.5*60*room_speed)
+bulletSpeed = 13;
+    
+    
 if(instance_exists(target)){
   if(!global.isDead){
     if(distance_to_object(target) &gt; 350){
@@ -88,7 +98,7 @@ if(instance_exists(target)){
     } else if(enemy_firing_timer &gt; enemy_rate){
         speed = 0;
         temp_bullet = instance_create(x, y, obj_enemy_bullet);
-        with(temp_bullet){move_towards_point(target.x, target.y, 10);}
+        with(temp_bullet){move_towards_point(target.x, target.y, bulletSpeed);}
         enemy_firing_timer = 0;
     }
   }

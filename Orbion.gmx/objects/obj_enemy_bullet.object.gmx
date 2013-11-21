@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_towards_point(player.x, player.y, 8);
+            <string>/*move_towards_point(player.x, player.y, 8);
 
 if (obj_HUDcontroller.alarm[1] &lt; 4*60*room_speed)
 move_towards_point(player.x, player.y, 10);
@@ -35,7 +35,7 @@ move_towards_point(player.x, player.y, 12);
 
 if (obj_HUDcontroller.alarm[1] &lt; 0.5*60*room_speed)
 move_towards_point(player.x, player.y, 13);
-
+*/
 half_life = 50;
 </string>
           </argument>
