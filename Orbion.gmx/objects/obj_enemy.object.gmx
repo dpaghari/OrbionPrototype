@@ -59,7 +59,7 @@ if (obj_HUDcontroller.alarm[1] == 2*60*room_speed)
 enemy_health = 16;
 
 if (obj_HUDcontroller.alarm[1] == 1*60*room_speed)
-enemy_health = 18;
+enemy_health = 20;
 
 if(instance_exists(player)){
   if(!global.isDead){

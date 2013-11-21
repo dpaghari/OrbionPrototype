@@ -59,9 +59,13 @@ if (obj_HUDcontroller.alarm[1] &lt; 3*60*room_speed)
     numspawn = 200;
     
 if (obj_HUDcontroller.alarm[1] &lt; 1*60*room_speed)
-    numspawn = 110;    
+    numspawn = 100;
+        
 if (obj_HUDcontroller.alarm[1] &lt; 0.5*60*room_speed)
-    numspawn = 80;   
+    numspawn = 50; 
+    
+if (obj_HUDcontroller.alarm[1] = 2*60*room_speed)
+    instance_create(300, 1200, obj_spawner);  
 
 //if(!instance_exists(obj_enemy)){
 if(spawn_timer &gt;= numspawn){
