@@ -30,6 +30,7 @@
     <sprite>sprites\spr_oilwell</sprite>
     <sprite>sprites\build_card1</sprite>
     <sprite>sprites\upgr_card1</sprite>
+    <sprite>sprites\upgr_card2</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_barrier</sprite>
     <sprite>sprites\spr_orbShot1</sprite>
@@ -57,6 +58,7 @@
     <object>objects\obj_drill</object>
     <object>objects\obj_buildcard</object>
     <object>objects\obj_labUpgrCard</object>
+    <object>objects\obj_labUpgrCard2</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_barrier</object>

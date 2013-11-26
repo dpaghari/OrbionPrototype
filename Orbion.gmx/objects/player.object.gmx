@@ -35,6 +35,7 @@ max_Ammo = 14;
 global.build_mode = false;
 global.reloading = false;
 global.labUpgr_mode = false;
+global.labUpgr_mode2 = false;
 global.orbShot = false;
 global.orbRank = 0;
 reloadTimer = 0;
@@ -523,15 +524,24 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 50){
+            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
 
     if( instance_exists (obj_labUpgrCard)){
         global.playerGold -= 200;
-        global.playerEnergy -= 50;
+        global.playerEnergy -= 100;
         alarm[0] = 5*30;
         }
 }
-    
+ 
+if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
+    if( instance_exists (obj_labUpgrCard2)){
+        global.playerGold -= 150;
+        global.playerEnergy -= 150;
+        //alarm[1] = 30*5;
+        }
+        
+        
+}   
 </string>
           </argument>
         </arguments>
@@ -554,13 +564,27 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 50){
+            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard)){
         global.playerGold -= 200;
-        global.playerEnergy -= 50;
+        global.playerEnergy -= 100;
         alarm[1] = 30*5;
         }
+        
+        
 }
+
+if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
+    if( instance_exists (obj_labUpgrCard2)){
+        global.playerGold -= 250;
+        global.playerEnergy -= 100;
+       // alarm[1] = 30*5;
+        }
+        
+        
+}
+
+
 </string>
           </argument>
         </arguments>
@@ -596,17 +620,42 @@ if (instance_exists (obj_lab)){
         global.labUpgr_mode = false;
     }
 }
+if (instance_exists (obj_deflab)){
+    if (obj_deflab.inProximity){
+        global.labUpgr_mode2 = !global.labUpgr_mode2;
+        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard2); 
+    }
+    else{
+        global.labUpgr_mode2 = false;
+    }
+}
 
 if (!global.labUpgr_mode &amp;&amp; !upgrCardOff)
 {
-    global.labUpgr_mode = false;
+    //global.labUpgr_mode = false;
     global.build_mode = not global.build_mode;
     
     if(global.build_mode){    
         instance_create(view_xview, view_yview, obj_buildcard); 
     }
 }
+if(!global.labUpgr_mode2 &amp;&amp; upgrCardOff)
+{
+//global.labUpgr_mode2 = false;
+}
 
+
+/*
+if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
+{
+    global.labUpgr_mode2 = false;
+    global.build_mode = not global.build_mode;
+    
+    if(global.build_mode){    
+        instance_create(view_xview, view_yview, obj_buildcard); 
+    }
+}
+*/
 
 
 </string>

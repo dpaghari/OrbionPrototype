@@ -29,7 +29,14 @@
 {
 instance_destroy();
 }
-
+if(global.labUpgr_mode)
+{
+instance_destroy();
+}
+if(global.labUpgr_mode2)
+{
+instance_destroy();
+}
 obj_buildcard.x = player.x;
 obj_buildcard.y = player.y; 
 </string>
