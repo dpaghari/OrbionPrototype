@@ -109,7 +109,7 @@ draw_text(x, y, "Reloading");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(drill, -1,x, y);
+            <string>draw_sprite(sprite_index, image_index,x, y);
 if(hp &lt; maxhp)
     draw_healthbar(x-sprite_width/3, y-sprite_height/2-10, x+sprite_width/3, y-sprite_height/2-5, hp/maxhp*100, c_black, c_lime, c_lime, 0, true, true);
 </string>
