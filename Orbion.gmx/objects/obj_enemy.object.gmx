@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enemy_health = 8;
+            <string>enemy_health_max = 8;
+enemy_health = enemy_health_max;
 enemy_firing_timer = 0;
 enemy_rate = 20;
 </string>
@@ -178,6 +179,31 @@ if(enemy_health &lt;= 0){
     instance_destroy();
     global.killCount += 1;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite(spr_enemy, -1,x, y);
+if(enemy_health &lt; enemy_health_max)
+    draw_healthbar(x-sprite_width/5, y-sprite_height/2-10, x+sprite_width/5, y-sprite_height/2-5, enemy_health/enemy_health_max*100, c_black, c_lime, c_lime, 0, true, true);
 </string>
           </argument>
         </arguments>
