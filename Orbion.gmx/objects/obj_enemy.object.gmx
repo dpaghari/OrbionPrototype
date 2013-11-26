@@ -62,36 +62,35 @@ enemy_health = 12;
 if (obj_HUDcontroller.alarm[1] == 1*60*room_speed)
 enemy_health = 14;
 
-/*
-if(instance_exists(player)){
-  if(!global.isDead){
-    if(distance_to_object(player) &gt; 350){
-        move_towards_point(player.x, player.y, 3);
-    } else if(enemy_firing_timer &gt; enemy_rate){
-        speed = 0;
-        temp_bullet = instance_create(x, y, obj_enemy_bullet);
-        enemy_firing_timer = 0;
-    }
-  }
+
+
+//targetting closest entity
+//list of things to attack is in obj_spawner create
+var target = player;
+for (i=0; i&lt;global.targets_length; i+=1) {
+    var possibleTarget = instance_nearest(x, y, global.targets[i]);
+    if (distance_to_object(possibleTarget) &lt; distance_to_object(target))
+        target = possibleTarget;
 }
-*/
 
-
+/*
 var drillTarget = instance_nearest(x, y, obj_drill);
 var target = player;
 if (distance_to_object(drillTarget) &lt; distance_to_object(target))
     target = drillTarget;
+*/
 
+//change bullet speed based on current game time
 var bulletSpeed = 8;
 if (obj_HUDcontroller.alarm[1] &lt; 4*60*room_speed)
 bulletSpeed = 10;
 if (obj_HUDcontroller.alarm[1] &lt; 2*60*room_speed)
 bulletSpeed = 12;
-
 if (obj_HUDcontroller.alarm[1] &lt; 0.5*60*room_speed)
 bulletSpeed = 13;
+
     
-    
+//shoot bullet at target
 if(instance_exists(target)){
   if(!global.isDead){
     if(distance_to_object(target) &gt; 350){
