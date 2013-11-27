@@ -770,6 +770,48 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="52">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.build_mode) 
+{
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50)
+    {
+        global.playerGold -= 100;
+        global.playerEnergy -= 50;
+        instance_create(player.x, player.y, obj_dnalab);
+        global.build_mode = false;
+        global.cant_afford = false;
+    }
+    else
+    {
+        global.cant_afford = true;
+        obj_HUDcontroller.alarm[0] = 40;
+    }
+}
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="51">
       <action>
         <libid>1</libid>
