@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.playerHealth = 100;
+global.playerMaxHealth = 100;
 global.playerShields = 0;
 global.playerAmmo = 10;
 global.isDead = false;
