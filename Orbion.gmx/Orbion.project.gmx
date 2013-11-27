@@ -39,6 +39,7 @@
     <sprite>sprites\spr_orbShot3</sprite>
     <sprite>sprites\def_lab</sprite>
     <sprite>sprites\dna_lab</sprite>
+    <sprite>sprites\spr_turret</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\terrain</background>
@@ -67,6 +68,7 @@
     <object>objects\obj_spawner</object>
     <object>objects\obj_barrier</object>
     <object>objects\obj_oilwell</object>
+    <object>objects\obj_turret</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
