@@ -259,6 +259,8 @@ draw_text(view_xview + 400, view_yview + 400, "You have not enough Resources");
 
 draw_text(view_xview + 3, view_yview, "HP: ");
 draw_text(view_xview + 100, view_yview, global.playerHealth);
+draw_text(view_xview + 3, view_yview + 25, "Shields: ");
+draw_text(view_xview + 100, view_yview + 25, global.playerShields);
 draw_text(view_xview + 200, view_yview, "Ammo: ");
 draw_text(view_xview + 300, view_yview, global.playerAmmo);
 draw_set_color(c_yellow);

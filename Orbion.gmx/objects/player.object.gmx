@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.playerHealth = 100;
+global.playerShields = 100;
 global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 1;
@@ -40,6 +41,7 @@ global.orbShot = false;
 global.orbRank = 0;
 reloadTimer = 0;
 reloadTime = 60;
+shieldTimer = 0;
 res = 0;
 firingTimer = 0;
 rate = 5;
@@ -143,7 +145,14 @@ if(reloadTimer &gt; reloadTime)
     reloadTimer = 0;
     global.reloading = false;
 }
-
+//shield regen
+if(global.playerShields &lt; 100){
+    shieldTimer++;
+    if(shieldTimer &gt; 25){
+        global.playerShields++;
+        shieldTimer = 0;
+    }
+}
 if(global.playerHealth &lt;= 0){
     //instance_destroy();
     global.playerHealth = 0;    
@@ -198,7 +207,9 @@ if(global.playerHealth &lt;= 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(facing == "down")
+            <string>var damage = 10;
+
+if(facing == "down")
 player.sprite_index = player_hurt;
 
 if(facing == "left")
@@ -211,8 +222,17 @@ if(facing == "up")
 player.sprite_index = player_shoot_back;
 
 
-
-global.playerHealth -= 10;
+var hpdmg = 0;
+//if your shields are less than damage you take
+//reduce health by damage - shields and set shields to zero
+if(global.playerShields &lt; damage){
+    hpdmg = damage - global.playerShields;
+    global.playerHealth -= hpdmg;
+    global.playerShields = 0;
+//otherwise just damage shields
+} else {
+    global.playerShields -= damage;
+}
 
 
 </string>
