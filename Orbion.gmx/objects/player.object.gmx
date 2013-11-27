@@ -37,6 +37,7 @@ global.build_mode = false;
 global.reloading = false;
 global.labUpgr_mode = false;
 global.labUpgr_mode2 = false;
+global.labUpgr_mode3 = false;
 global.orbShot = false;
 global.orbRank = 0;
 reloadTimer = 0;
@@ -418,8 +419,7 @@ if(global.playerShields &lt; damage){
             <kind>1</kind>
             <string>global.playerGold += 100;
 global.playerEnergy += 100;
-global.playerShields = 20;
-shieldOn = true;
+
 </string>
           </argument>
         </arguments>
@@ -653,6 +653,15 @@ if (instance_exists (obj_deflab)){
     }
     else{
         global.labUpgr_mode2 = false;
+    }
+}
+if (instance_exists (obj_dnalab)){
+    if (obj_dnalab.inProximity){
+        global.labUpgr_mode3 = !global.labUpgr_mode3;
+        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard3); 
+    }
+    else{
+        global.labUpgr_mode3 = false;
     }
 }
 
@@ -944,6 +953,31 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="48">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+global.playerShields = 20;
+shieldOn = true;
 </string>
           </argument>
         </arguments>
