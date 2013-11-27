@@ -29,12 +29,13 @@
 
 //list of things to attack
 //player does not need to be added here
-global.targets_length = 5; //used to iterate
+global.targets_length = 6; //used to iterate
 global.targets[0] = obj_drill;
 global.targets[1] = obj_generator;
 global.targets[2] = obj_medbay;
 global.targets[3] = obj_lab;
 global.targets[4] = obj_deflab;
+global.targets[5] = obj_turret;
 </string>
           </argument>
         </arguments>
