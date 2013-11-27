@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.playerHealth = 100;
-global.playerShields = 100;
+global.playerShields = 0;
 global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 1;
@@ -42,12 +42,16 @@ global.orbRank = 0;
 reloadTimer = 0;
 reloadTime = 60;
 shieldTimer = 0;
+shieldOn = false;
 res = 0;
 firingTimer = 0;
 rate = 5;
 resource_rate = 40;
 resource_timer = 0;
 facing = "down";
+
+//none, building, upgrading
+//global.state = none;
 
 </string>
           </argument>
@@ -146,7 +150,7 @@ if(reloadTimer &gt; reloadTime)
     global.reloading = false;
 }
 //shield regen
-if(global.playerShields &lt; 100){
+if(shieldOn &amp;&amp; global.playerShields &lt; 100){
     shieldTimer++;
     if(shieldTimer &gt; 25){
         global.playerShields++;
@@ -414,6 +418,8 @@ if(global.playerShields &lt; damage){
             <kind>1</kind>
             <string>global.playerGold += 100;
 global.playerEnergy += 100;
+global.playerShields = 20;
+shieldOn = true;
 </string>
           </argument>
         </arguments>
