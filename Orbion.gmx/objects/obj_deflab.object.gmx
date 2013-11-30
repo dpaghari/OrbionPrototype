@@ -57,11 +57,25 @@ hp = maxhp;
 if (point_distance(x, y, player.x, player.y) &lt; 100)
                     {
                         inProximity = true;
+        //if you get withing range of a building remove buildcard
+                        if(instance_exists(obj_buildcard)){
+                            with(obj_buildcard)
+                            {
+                                instance_destroy();
+                            }                        
+                        }
 
                     }
                     else
                     {
                         inProximity = false;
+        //if you leave the range of a lab remove upgradecard
+                        if(instance_exists(obj_labUpgrCard2)){
+                            with(obj_labUpgrCard2)
+                            {
+                            instance_destroy();
+                            }                        
+                        }
                     }
 
 </string>
