@@ -62,9 +62,9 @@ if (point_distance(x, y, player.x, player.y) &lt; 100)
                             with(obj_buildcard)
                             {
                                 instance_destroy();
-                            }                        
+                            }  
+                            global.state = 'none';                      
                         }
-
                     }
                     else
                     {
@@ -74,7 +74,8 @@ if (point_distance(x, y, player.x, player.y) &lt; 100)
                             with(obj_labUpgrCard3)
                             {
                             instance_destroy();
-                            }                        
+                            }  
+                            global.state = 'none';                      
                         }
                     }
 

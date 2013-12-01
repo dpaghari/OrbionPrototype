@@ -64,6 +64,7 @@
     <object>objects\obj_labUpgrCard</object>
     <object>objects\obj_labUpgrCard2</object>
     <object>objects\obj_labUpgrCard3</object>
+    <object>objects\obj_parent_upgrade</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_barrier</object>

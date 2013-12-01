@@ -53,7 +53,7 @@ resource_timer = 0;
 facing = "down";
 
 //none, building, upgrading
-//global.state = none;
+global.state = 'none';
 
 </string>
           </argument>
@@ -564,7 +564,7 @@ if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
     if( instance_exists (obj_labUpgrCard2)){
         global.playerGold -= 150;
         global.playerEnergy -= 150;
-        //alarm[1] = 30*5;
+        //alarm[1] = 5*30;
         }
         
         
@@ -597,6 +597,30 @@ if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
 
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.playerShields = 200000;
+shieldOn = true;
 </string>
           </argument>
         </arguments>
@@ -662,64 +686,58 @@ if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>//global.state = none, building, upgrading
 
-upgrCardOff = false;
-
-if (instance_exists (obj_lab)){
-    if (obj_lab.inProximity){
-        global.labUpgr_mode = !global.labUpgr_mode;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard); 
-    }
-    else{
-        global.labUpgr_mode = false;
-    }
-}
-if (instance_exists (obj_deflab)){
-    if (obj_deflab.inProximity){
-        global.labUpgr_mode2 = !global.labUpgr_mode2;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard2); 
-    }
-    else{
-        global.labUpgr_mode2 = false;
-    }
-}
-if (instance_exists (obj_dnalab)){
-    if (obj_dnalab.inProximity){
-        global.labUpgr_mode3 = !global.labUpgr_mode3;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard3); 
-    }
-    else{
-        global.labUpgr_mode3 = false;
-    }
-}
-
-if (!global.labUpgr_mode &amp;&amp; !upgrCardOff)
+//If building or upgrading
+if(global.state == 'building' || global.state == 'upgrading')
 {
-    //global.labUpgr_mode = false;
-    global.build_mode = not global.build_mode;
-    
-    if(global.build_mode){    
-        instance_create(view_xview, view_yview, obj_buildcard); 
+    //if building remove buildcard
+    if(instance_exists(obj_buildcard))
+    {
+        with(obj_buildcard)
+        {
+        instance_destroy();
+        }
+        global.state = 'none';                                
     }
-}
-if(!global.labUpgr_mode2 &amp;&amp; upgrCardOff)
-{
-//global.labUpgr_mode2 = false;
-}
-
-
-/*
-if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
-{
-    global.labUpgr_mode2 = false;
-    global.build_mode = not global.build_mode;
-    
-    if(global.build_mode){    
-        instance_create(view_xview, view_yview, obj_buildcard); 
+    //if upgrading remove upgradecard
+    if(instance_exists(obj_parent_upgrade))
+    {
+        with(obj_parent_upgrade)
+        {
+        instance_destroy();
+        }
+        global.state = 'none';                        
     }
-}
-*/
+//if state = none
+} else {
+    //In range of building -&gt; open upgrade
+    if (instance_exists (obj_lab)){
+        if (obj_lab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard);
+            global.state = 'upgrading';
+        }
+    }
+    if (instance_exists (obj_deflab)){
+        if (obj_deflab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard2);
+            global.state = 'upgrading'; 
+        }
+    }
+    if (instance_exists (obj_dnalab)){
+        if (obj_dnalab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard3);
+            global.state = 'upgrading'; 
+        }
+    }
+    //else open buildcard
+    if (global.state != 'upgrading')
+    {
+        instance_create(view_xview, view_yview, obj_buildcard);
+        global.state = 'building'; 
+    }
+}//end of else
+
 
 
 </string>
@@ -744,22 +762,20 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode)
+            <string>if(global.state == 'building') 
 {
-    if(!instance_exists(obj_medbay)){
-    if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
+    if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_medbay))
     {
         global.playerGold -= 100;
         global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_medbay);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
         global.cant_afford = true;
         obj_HUDcontroller.alarm[0] = 40;
-    }
     }
 }
 
@@ -788,21 +804,20 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode)
+            <string>if(global.state == 'building') 
 {
     if(global.playerGold &gt;= 50)
     {
         global.playerGold -= 50;
         instance_create(player.x, player.y, obj_generator);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
         global.cant_afford = true;
         obj_HUDcontroller.alarm[0] = 40;
-    }
-    
+    } 
 }
 
 
@@ -831,15 +846,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building')  
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_dnalab))
     {
         global.playerGold -= 100;
         global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_dnalab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
@@ -873,7 +888,7 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building') 
 {
     if (instance_exists (obj_oilwell)){
         var anOilWell = instance_nearest(player.x, player.y, obj_oilwell);
@@ -883,8 +898,8 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
                 global.playerGold -= 100;
                 instance_create(anOilWell.x, anOilWell.y, obj_drill);
                 with(anOilWell){instance_destroy()}
-                global.build_mode = false;
                 global.cant_afford = false;
+                global.state = 'none';
             }
             else
             {
@@ -920,15 +935,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building')  
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_deflab))
     {
         global.playerGold -= 100;
         global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_deflab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
@@ -962,15 +977,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building') 
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_lab))
     {
         global.playerGold -= 100;
         global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_lab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {

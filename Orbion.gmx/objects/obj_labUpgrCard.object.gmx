@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-10</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_parent_upgrade</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="3" enumb="0">
@@ -25,12 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(!global.labUpgr_mode)
-{
-instance_destroy();
-}
-
-obj_labUpgrCard.x = player.x + 410;
+            <string>obj_labUpgrCard.x = player.x + 410;
 obj_labUpgrCard.y = player.y + 180; 
 </string>
           </argument>
