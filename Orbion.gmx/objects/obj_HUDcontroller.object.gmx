@@ -243,38 +243,95 @@ global.killCount = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.reloading)
+            <string>draw_text(view_xview + 3, view_yview + 5, "HP: ");
+draw_text(view_xview + 5, view_yview + 650, "Ammo: ");
+draw_text(view_xview + 80, view_yview + 650, global.playerAmmo);
+var x1, y1, w, h;
+x1 = view_xview + 40;
+y1 = view_yview + 10;
+w = 300;
+h = 15;
+draw_set_color(merge_color(c_red, c_lime, global.playerHealth/ global.playerMaxHealth));
+draw_rectangle(x1, y1, x1 + (w * (global.playerHealth / global.playerMaxHealth)), y1 + h, 0);// healthbar
+draw_rectangle(x1, y1, x1 + w, y1 + h, 1);// outline
+
+if(global.shieldOn){
+draw_set_color(c_white);
+draw_text(view_xview + 3, view_yview + 25, "Shields: ");
+var x2, y2, w2, h2;
+x2 = view_xview + 70;
+y2 = view_yview + 30;
+w2 = 150;
+h2 = 15;
+draw_set_color(merge_color(c_white, c_aqua, global.playerShields/ global.playerMaxShields));
+draw_rectangle(x2, y2, x2 + (w2 * (global.playerShields / global.playerMaxShields)), y2 + h2, 0);// healthbar
+draw_rectangle(x2, y2, x2 + w2, y2 + h2, 1);// outline
+}
+
+
+
+if(global.reloading)
 {
+draw_set_color(c_white);
 draw_text(player.x - 30, player.y - 50, "Reloading");
 }
 
 if(global.isDead)
 {
+draw_set_color(c_white);
 draw_text(player.x - 60, player.y - 200, "You are DEAD");
 }
 if(global.cant_afford)
 {
+draw_set_color(c_white);
 draw_text(view_xview + 400, view_yview + 400, "You have not enough Resources");
 }
 
-draw_text(view_xview + 3, view_yview, "HP: ");
-draw_text(view_xview + 100, view_yview, global.playerHealth);
-draw_text(view_xview + 3, view_yview + 25, "Shields: ");
-draw_text(view_xview + 100, view_yview + 25, global.playerShields);
-draw_text(view_xview + 200, view_yview, "Ammo: ");
-draw_text(view_xview + 300, view_yview, global.playerAmmo);
-draw_set_color(c_yellow);
-draw_text(view_xview + 400, view_yview, "Gold: ");
-draw_text(view_xview + 500, view_yview, global.playerGold);
-draw_set_color(c_aqua);
-draw_text(view_xview + 600, view_yview, "Energy: ");
-draw_text(view_xview + 700, view_yview, global.playerEnergy);
 
-if(player.alarm[0] &gt; 0 || player.alarm[1] &gt; 0)
+
+//draw_text(view_xview + 100, view_yview, global.playerHealth);
+
+//draw_text(view_xview + 100, view_yview + 25, global.playerShields);
+
+draw_set_color(c_yellow);
+draw_text(view_xview + 400, view_yview + 5, "Gold: ");
+draw_text(view_xview + 500, view_yview + 5, global.playerGold);
+draw_set_color(c_aqua);
+draw_text(view_xview + 600, view_yview + 5, "Energy: ");
+draw_text(view_xview + 700, view_yview + 5, global.playerEnergy);
+
+if(player.alarm[0] &gt; 0 || player.alarm[1] &gt; 0 || player.alarm[2] &gt; 0 || player.alarm[3] &gt; 0 || player.alarm[4] &gt; 0 || player.alarm[5] &gt; 0)
 {
     draw_set_color(c_green);
     draw_text(player.x - 30, player.y - 75, "Researching");
+    
+    
 }
+if(player.alarm[0] &gt;= 0 &amp;&amp; player.alarm[0] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+ScatterShot!");
+    }
+if(player.alarm[1] &gt;= 0 &amp;&amp; player.alarm[1] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+OrbShot Size!");
+    }
+if(player.alarm[2] &gt;= 0 &amp;&amp; player.alarm[2] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+1 Turret(s)!");
+    }
+if(player.alarm[3] &gt;= 0 &amp;&amp; player.alarm[3] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+100 Max Shields!");
+    }
+if(player.alarm[4] &gt;= 0 &amp;&amp; player.alarm[4] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+Movespeed!");
+    }
+if(player.alarm[5] &gt;= 0 &amp;&amp; player.alarm[5] &lt;= 20){
+    draw_set_color(c_white);
+    draw_text(player.x - 30, player.y - 100, "+MaxHealth!");
+    }
+
 
 draw_set_color(c_white);
 draw_text(view_xview + 800, view_yview + 30, "Kill 75 Aliens");

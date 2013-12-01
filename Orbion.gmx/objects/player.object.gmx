@@ -28,6 +28,7 @@
             <string>global.playerHealth = 100;
 global.playerMaxHealth = 100;
 global.playerShields = 0;
+global.playerMaxShields = 100;
 global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 1;
@@ -41,10 +42,12 @@ global.labUpgr_mode2 = false;
 global.labUpgr_mode3 = false;
 global.orbShot = false;
 global.orbRank = 0;
+playerMvspd = 8;
+turretNum = 0;
 reloadTimer = 0;
 reloadTime = 60;
 shieldTimer = 0;
-shieldOn = false;
+global.shieldOn = false;
 res = 0;
 firingTimer = 0;
 rate = 5;
@@ -55,6 +58,101 @@ facing = "down";
 //none, building, upgrading
 global.state = 'none';
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.playerMaxHealth += 100;  
+global.playerHealth += 100;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>playerMvspd += 1.2;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.shieldOn = true;
+global.playerMaxShields += 100;
+global.playerShields += 100;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>turretNum++;
 </string>
           </argument>
         </arguments>
@@ -152,7 +250,7 @@ if(reloadTimer &gt; reloadTime)
     global.reloading = false;
 }
 //shield regen
-if(shieldOn &amp;&amp; global.playerShields &lt; 100){
+if(global.shieldOn &amp;&amp; global.playerShields &lt; global.playerMaxShields){
     shieldTimer++;
     if(shieldTimer &gt; 25){
         global.playerShields++;
@@ -266,11 +364,11 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x, player.y - 10)){
-    player.y -= 10;
+    player.y -= playerMvspd;
     player.sprite_index = player_runu;
     facing = "up";
     image_speed = 0.3;
-    view_yview -= 10;
+    view_yview -= playerMvspd;
     }
 }
 
@@ -304,11 +402,11 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x, player.y + 10)){
-    player.y += 10;   
+    player.y += playerMvspd;   
     player.sprite_index = player_rund;
     image_speed = 0.3;
     facing = "down";
-    view_yview += 10;
+    view_yview += playerMvspd;
     }
 }
 
@@ -342,12 +440,12 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x - 10, player.y)){
-    player.x += 10;
+    player.x += playerMvspd;
     player.sprite_index = player_runs;
     image_speed = 0.3;
     facing = "right";
     image_xscale = -1; 
-    view_xview += 10;
+    view_xview += playerMvspd;
     }
 }
 
@@ -381,12 +479,12 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x - 10, player.y)){
-        player.x -= 10;
+        player.x -= playerMvspd;
         player.sprite_index = player_runs;
         image_speed = 0.3;
         facing = "left";  
         image_xscale = 1; 
-        view_xview -= 10;
+        view_xview -= playerMvspd;
     }
     
 }
@@ -508,6 +606,35 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="84">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(turretNum &gt; 0){
+instance_create(player.x, player.y, obj_turret);
+turretNum--;
+}
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="82">
       <action>
         <libid>1</libid>
@@ -560,43 +687,25 @@ global.reloading = true;
         }
 }
  
-if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
+if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
-        global.playerGold -= 150;
-        global.playerEnergy -= 150;
-        //alarm[1] = 5*30;
+        global.playerGold -= 250;
+        global.playerEnergy -= 100;
+        alarm[2] = 5*30;
         }
         
         
 }   
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="80">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>instance_create(player.x, player.y, obj_turret);
 
-
-
-
-
+if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 125){
+    if( instance_exists (obj_labUpgrCard3)){
+        global.playerGold -= 200;
+        global.playerEnergy -= 125;
+        alarm[4] = 5*30;
+        }
+        
+        
+} 
 </string>
           </argument>
         </arguments>
@@ -657,13 +766,21 @@ if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
         global.playerGold -= 250;
         global.playerEnergy -= 100;
-       // alarm[1] = 30*5;
+        alarm[3] = 30*5;
         }
         
         
 }
 
-
+if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
+    if( instance_exists (obj_labUpgrCard3)){
+        global.playerGold -= 150;
+        global.playerEnergy -= 150;
+        alarm[5] = 30*5;
+        }
+        
+        
+}
 </string>
           </argument>
         </arguments>
@@ -997,31 +1114,6 @@ if(global.state == 'building' || global.state == 'upgrading')
 
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="48">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-global.playerShields = 20;
-shieldOn = true;
 </string>
           </argument>
         </arguments>
