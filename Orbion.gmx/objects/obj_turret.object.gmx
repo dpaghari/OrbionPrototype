@@ -77,12 +77,13 @@ hp = maxhp;
 }
 
 
-cooldown = 2*room_speed;
+cooldown = .5*room_speed;
 if (alarm[0] &lt;= 0){
     var target = instance_nearest(x, y, obj_enemy);
     var bulletSpeed = 10;
     if(distance_to_object(target) &lt; 400){
-        var temp_bullet = instance_create(x, y, obj_bullet);
+        var temp_bullet = instance_create(x, y, obj_turrBullet);
+        temp_bullet.image_angle = point_direction(x, y, target.x, target.y);
         with(temp_bullet){move_towards_point(target.x, target.y, bulletSpeed);}
     }
     alarm[0] = cooldown;
@@ -134,7 +135,7 @@ if (alarm[0] &lt;= 0){
             <kind>1</kind>
             <string>draw_sprite(sprite_index, image_index,x, y);
 if(hp &lt; maxhp)
-    draw_healthbar(x-sprite_width/3, y-sprite_height/2-10, x+sprite_width/3, y-sprite_height/2-5, hp/maxhp*100, c_black, c_lime, c_lime, 0, true, true);
+    draw_healthbar(x -sprite_width/3 + 3, y-sprite_height/2-10, x + sprite_width/3, y - sprite_height/2-5, hp/maxhp*100, c_black, c_lime, c_lime, 0, true, true);
 </string>
           </argument>
         </arguments>

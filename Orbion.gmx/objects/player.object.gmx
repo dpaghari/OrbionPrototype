@@ -40,8 +40,22 @@ global.reloading = false;
 global.labUpgr_mode = false;
 global.labUpgr_mode2 = false;
 global.labUpgr_mode3 = false;
+
+buildingGCost = 0;
+buildingECost = 0;
+
 global.orbShot = false;
+
 global.orbRank = 0;
+global.scatterRank = 0;
+global.shieldRank = 0;
+global.mvspdRank = 0;
+global.maxHPRank = 0;
+
+global.maxRank = false;
+
+
+
 playerMvspd = 8;
 turretNum = 0;
 reloadTimer = 0;
@@ -58,6 +72,29 @@ facing = "down";
 //none, building, upgrading
 global.state = 'none';
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.maxRank = false;
 </string>
           </argument>
         </arguments>
@@ -80,8 +117,18 @@ global.state = 'none';
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.playerMaxHealth += 100;  
-global.playerHealth += 100;
+            <string>if(global.maxHPRank &lt; 3 ){
+    global.playerMaxHealth += 100;  
+    global.playerHealth += 100;
+    global.maxHPRank++;
+}
+else{
+    global.maxHPRank = 3;
+}
+    
+
+
+
 </string>
           </argument>
         </arguments>
@@ -104,7 +151,17 @@ global.playerHealth += 100;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>playerMvspd += 1.2;
+            <string>if(global.mvspdRank &lt; 3 ){
+    playerMvspd += 1.2;
+    global.mvspdRank++;
+}
+else{
+    global.mvspdRank = 3;
+}
+    
+
+
+
 </string>
           </argument>
         </arguments>
@@ -127,9 +184,20 @@ global.playerHealth += 100;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.shieldOn = true;
-global.playerMaxShields += 100;
-global.playerShields += 100;
+            <string>if(global.shieldRank &lt; 3 ){
+    global.shieldOn = true;
+    global.playerMaxShields += 100;
+    global.playerShields += 100;
+    global.shieldRank++;
+}
+else{
+    global.shieldRank = 3;
+}
+    
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -206,7 +274,19 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.playerBulPerShot++;
+            <string>if(global.scatterRank &lt; 3 ){
+    global.playerBulPerShot++;
+    global.scatterRank++;
+}
+else{
+    global.scatterRank = 3;
+}
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -565,11 +645,12 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 {
                     if(!global.orbShot){
                     bull = instance_create(player.x, player.y, obj_bullet);
-                    
+                    bull.image_angle = shootAngle;
                     bull.speed = 20;
                     }
                     else{
                     bull = instance_create(player.x, player.y, obj_orbShot);
+                    bull.image_angle = shootAngle;
                     bull.speed = 10;
                     }
                     var angleOffset = playerMaxScatterAngle/2 - playerMaxScatterAngle/(global.playerBulPerShot + 1)*currBul;
@@ -678,31 +759,76 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
+            <string>if(instance_exists(obj_labUpgrCard)){
+    if(global.scatterRank == 1){
+    buildingGCost = 200;
+    buildingECost = 125;
+    }
+    if(global.scatterRank == 2){
+    buildingGCost = 250;
+    buildingECost = 150;
+    }
+    if(global.scatterRank == 3){
+    buildingGCost = 275;
+    buildingECost = 175;
+    }
+}
+if(instance_exists(obj_labUpgrCard3)){
+    if(global.mvspdRank == 1){
+    buildingGCost = 150;
+    buildingECost = 100;
+    }
+    if(global.mvspdRank == 2){
+    buildingGCost = 175;
+    buildingECost = 125;
+    }
+    if(global.mvspdRank == 3){
+    buildingGCost = 200;
+    buildingECost = 150;
+    }
 
+}
+
+
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
+    
     if( instance_exists (obj_labUpgrCard)){
-        global.playerGold -= 200;
-        global.playerEnergy -= 100;
+        if(global.scatterRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[0] = 5*30;
+        }
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
         }
 }
  
 if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
+        
         global.playerGold -= 250;
-        global.playerEnergy -= 100;
+        //global.playerEnergy -= 100;
         alarm[2] = 5*30;
         }
         
         
 }   
 
-if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 125){
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard3)){
-        global.playerGold -= 200;
-        global.playerEnergy -= 125;
+        if(global.mvspdRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[4] = 5*30;
         }
+        else
+        {
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
         
         
 } 
@@ -752,33 +878,93 @@ shieldOn = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
+            <string>if(instance_exists(obj_labUpgrCard)){
+    if(global.orbRank == 1){
+    buildingGCost = 200;
+    buildingECost = 100;
+    }
+    if(global.orbRank == 2){
+    buildingGCost = 250;
+    buildingECost = 125;
+    }
+    if(global.orbRank == 3){
+    buildingGCost = 275;
+    buildingECost = 150;
+    }
+}
+if(instance_exists(obj_labUpgrCard3)){
+    if(global.maxHPRank == 1){
+    buildingGCost = 150;
+    buildingECost = 150;
+    }
+    if(global.maxHPRank == 2){
+    buildingGCost = 175;
+    buildingECost = 175;
+    }
+    if(global.maxHPRank == 3){
+    buildingGCost = 200;
+    buildingECost = 200;
+    }
+}
+if(instance_exists(obj_labUpgrCard2)){    
+    if(global.shieldRank == 1){
+    buildingGCost = 250;
+    buildingECost = 125;
+    }
+    if(global.shieldRank == 2){
+    buildingGCost = 275;
+    buildingECost = 150;
+    }
+    if(global.shieldRank == 3){
+    buildingGCost = 300;
+    buildingECost = 175;
+    }
+
+}
+
+
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard)){
-        global.playerGold -= 200;
-        global.playerEnergy -= 100;
+        if(global.orbRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[1] = 30*5;
         }
-        
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }   
+    }
         
 }
 
-if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard2)){
-        global.playerGold -= 250;
-        global.playerEnergy -= 100;
+        if(global.shieldRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[3] = 30*5;
         }
-        
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
         
 }
 
-if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard3)){
-        global.playerGold -= 150;
-        global.playerEnergy -= 150;
+        if(global.maxHPRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 150;
         alarm[5] = 30*5;
         }
-        
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
         
 }
 </string>
@@ -884,7 +1070,7 @@ if(global.state == 'building' || global.state == 'upgrading')
     if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_medbay))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 30;
+        //global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_medbay);
         global.cant_afford = false;
         global.state = 'none';
@@ -968,7 +1154,7 @@ if(global.state == 'building' || global.state == 'upgrading')
     if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_dnalab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 50;
+        //global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_dnalab);
         global.cant_afford = false;
         global.state = 'none';
@@ -1057,7 +1243,7 @@ if(global.state == 'building' || global.state == 'upgrading')
     if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_deflab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 30;
+        //global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_deflab);
         global.cant_afford = false;
         global.state = 'none';
@@ -1099,7 +1285,7 @@ if(global.state == 'building' || global.state == 'upgrading')
     if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_lab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 50;
+        //global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_lab);
         global.cant_afford = false;
         global.state = 'none';

@@ -10,6 +10,7 @@
     <sprite>sprites\generator</sprite>
     <sprite>sprites\medbay</sprite>
     <sprite>sprites\bullet</sprite>
+    <sprite>sprites\turr_bullet</sprite>
     <sprite>sprites\spr_enemy_bullet</sprite>
     <sprites name="player">
       <sprite>sprites\player_spr</sprite>
@@ -56,6 +57,7 @@
     <object>objects\obj_deflab</object>
     <object>objects\obj_dnalab</object>
     <object>objects\obj_bullet</object>
+    <object>objects\obj_turrBullet</object>
     <object>objects\obj_orbShot</object>
     <object>objects\obj_enemy_bullet</object>
     <object>objects\obj_HUDcontroller</object>
