@@ -28,6 +28,15 @@
             <string>global.playerGold = 0;
 global.playerEnergy = 0;
 global.killCount = 0;
+global.artifactCount = 0;
+timerRate = 0;
+
+
+instance_create(view_xview , view_yview + 300, obj_orbicon);
+instance_create(view_xview, view_yview + 350, obj_scattericon);
+instance_create(view_xview, view_yview + 400, obj_shieldicon);
+instance_create(view_xview, view_yview + 450, obj_mvspdicon);
+instance_create(view_xview, view_yview + 500, obj_maxhpicon);
 
 </string>
           </argument>
@@ -49,7 +58,7 @@ global.killCount = 0;
         <arguments>
           <argument>
             <kind>0</kind>
-            <string>5*60*room_speed</string>
+            <string>8*60*room_speed</string>
           </argument>
           <argument>
             <kind>4</kind>
@@ -131,53 +140,33 @@ global.killCount = 0;
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>global.killCount</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>75</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>301</id>
-        <kind>0</kind>
-        <userelative>-1</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_set_alarm</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>0</kind>
-            <string>35</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>2</string>
+            <kind>1</kind>
+            <string>
+
+if(global.killCount &gt;= 100 &amp;&amp; global.artifactCount &gt;= 40){
+var timerGo = 200;
+timerRate++;
+if(timerRate &gt; timerGo){
+room_goto(0);
+}
+
+}
+
+
+</string>
           </argument>
         </arguments>
       </action>
@@ -338,13 +327,16 @@ if(player.alarm[5] &gt;= 0 &amp;&amp; player.alarm[5] &lt;= 20){
 
 
 draw_set_color(c_white);
-draw_text(view_xview + 800, view_yview + 30, "Kill 75 Aliens");
-draw_text(view_xview + 800, view_yview, "Time Remaining: " + string(round(alarm[1]/room_speed)));
-draw_text(view_xview + 800, view_yview + 60, "Kills: ");
-draw_text(view_xview + 850, view_yview + 60, global.killCount);
-if(global.killCount == 75)
+draw_text(view_xview + 750, view_yview + 30, "Kill 100 Aliens");
+draw_text(view_xview + 750, view_yview, "Time Remaining: " + string(round(alarm[1]/room_speed)));
+draw_text(view_xview + 750, view_yview + 60, "Kills: ");
+draw_text(view_xview + 800, view_yview + 60, global.killCount);
+draw_text(view_xview + 750, view_yview + 90, "Collect 25 Alien Artifacts: ");
+draw_text(view_xview + 950, view_yview + 90, global.artifactCount);
+draw_text(view_xview + 970, view_yview + 90, "of 40");
+if(global.killCount &gt;= 100 &amp;&amp; global.artifactCount &gt;= 40)
 {
-draw_text(view_xview + 500, view_yview + 400, "MISSION SUCCESS");
+draw_text(view_xview + 400, view_yview + 100, "MISSION SUCCESS");
 
 //room_goto(0);
 }

@@ -29,6 +29,7 @@
 enemy_health = enemy_health_max;
 enemy_firing_timer = 0;
 enemy_rate = 20;
+global.enemy_drop_rate = 0;
 </string>
           </argument>
         </arguments>
@@ -53,14 +54,24 @@ enemy_rate = 20;
             <kind>1</kind>
             <string>var temp_bullet;
 
-if (obj_HUDcontroller.alarm[1] == 4*60*room_speed)
-enemy_health = 10;
-
-if (obj_HUDcontroller.alarm[1] == 2*60*room_speed)
+if (obj_HUDcontroller.alarm[1] == 8*60*room_speed)
 enemy_health = 12;
 
+if (obj_HUDcontroller.alarm[1] == 6*60*room_speed)
+enemy_health = 16;
+
+if (obj_HUDcontroller.alarm[1] == 4*60*room_speed)
+enemy_health = 20;
+
+if (obj_HUDcontroller.alarm[1] == 2*60*room_speed)
+enemy_health = 22;
+
 if (obj_HUDcontroller.alarm[1] == 1*60*room_speed)
-enemy_health = 14;
+enemy_health = 26;
+
+if (obj_HUDcontroller.alarm[1] == 0.5*60*room_speed)
+enemy_health = 30;
+
 
 
 
@@ -82,12 +93,16 @@ if (distance_to_object(drillTarget) &lt; distance_to_object(target))
 
 //change bullet speed based on current game time
 var bulletSpeed = 8;
-if (obj_HUDcontroller.alarm[1] &lt; 4*60*room_speed)
+if (obj_HUDcontroller.alarm[1] &lt; 8*60*room_speed)
+bulletSpeed = 9;
+if (obj_HUDcontroller.alarm[1] &lt; 6*60*room_speed)
 bulletSpeed = 10;
-if (obj_HUDcontroller.alarm[1] &lt; 2*60*room_speed)
+if (obj_HUDcontroller.alarm[1] &lt; 4*60*room_speed)
 bulletSpeed = 12;
+if (obj_HUDcontroller.alarm[1] &lt; 2*60*room_speed)
+bulletSpeed = 14;
 if (obj_HUDcontroller.alarm[1] &lt; 0.5*60*room_speed)
-bulletSpeed = 13;
+bulletSpeed = 16;
 
     
 //shoot bullet at target
@@ -147,6 +162,10 @@ enemy_health -= 4;
 }
 
 if(enemy_health &lt;= 0){
+    global.enemy_drop_rate = floor(random(99)) + 1;
+    if(global.enemy_drop_rate &gt; 0 &amp;&amp; global.enemy_drop_rate &lt; 30){
+    instance_create(x, y, obj_alien_art);
+    }
     instance_destroy();
     global.killCount += 1;
 }
@@ -176,6 +195,10 @@ if(enemy_health &lt;= 0){
             <kind>1</kind>
             <string>enemy_health -= 2;
 if(enemy_health &lt;= 0){
+    global.enemy_drop_rate = floor(random(99)) + 1;
+    if(global.enemy_drop_rate &gt; 0 &amp;&amp; global.enemy_drop_rate &lt;= 30){
+    instance_create(x, y, obj_alien_art);
+    }
     instance_destroy();
     global.killCount += 1;
 }
@@ -203,8 +226,15 @@ if(enemy_health &lt;= 0){
             <kind>1</kind>
             <string>enemy_health -= 1;
 if(enemy_health &lt;= 0){
+    global.enemy_drop_rate = floor(random(99)) + 1;
+    if(global.enemy_drop_rate &gt;= 1 &amp;&amp; global.enemy_drop_rate &lt;= 30){
+    instance_create(x, y, obj_alien_art);
+    }
     instance_destroy();
     global.killCount += 1;
+    
+    
+    
 }
 </string>
           </argument>
@@ -237,7 +267,7 @@ if(enemy_health &lt; enemy_health_max)
       </action>
     </event>
   </events>
-  <PhysicsObject>0</PhysicsObject>
+  <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>

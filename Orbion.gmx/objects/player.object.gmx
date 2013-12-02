@@ -28,7 +28,7 @@
             <string>global.playerHealth = 100;
 global.playerMaxHealth = 100;
 global.playerShields = 0;
-global.playerMaxShields = 100;
+global.playerMaxShields = 50;
 global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 1;
@@ -43,10 +43,9 @@ global.labUpgr_mode3 = false;
 
 buildingGCost = 0;
 buildingECost = 0;
-
 global.orbShot = false;
 
-global.orbRank = 0;
+global.orbRank = 1;
 global.scatterRank = 0;
 global.shieldRank = 0;
 global.mvspdRank = 0;
@@ -57,7 +56,8 @@ global.maxRank = false;
 
 
 playerMvspd = 8;
-turretNum = 0;
+global.turretOn = false;
+global.turretNum = 0;
 reloadTimer = 0;
 reloadTime = 60;
 shieldTimer = 0;
@@ -185,9 +185,12 @@ else{
           <argument>
             <kind>1</kind>
             <string>if(global.shieldRank &lt; 3 ){
+    if(!instance_exists(obj_shield)){
+    instance_create(x, y, obj_shield);
+    }
     global.shieldOn = true;
-    global.playerMaxShields += 100;
-    global.playerShields += 100;
+    global.playerMaxShields += 50;
+    global.playerShields += 50;
     global.shieldRank++;
 }
 else{
@@ -220,7 +223,7 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>turretNum++;
+            <string>global.turretOn = true;
 </string>
           </argument>
         </arguments>
@@ -332,8 +335,11 @@ if(reloadTimer &gt; reloadTime)
 //shield regen
 if(global.shieldOn &amp;&amp; global.playerShields &lt; global.playerMaxShields){
     shieldTimer++;
-    if(shieldTimer &gt; 25){
-        global.playerShields++;
+    if(!instance_exists(obj_shield) &amp;&amp; global.playerShields &gt;= 20){
+    instance_create(x, y, obj_shield);
+    }
+    if(shieldTimer &gt; 20){
+        global.playerShields += 2;
         shieldTimer = 0;
     }
 }
@@ -704,9 +710,12 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(turretNum &gt; 0){
+            <string>if(global.turretOn){
+if(global.turretNum &lt; 3){
 instance_create(player.x, player.y, obj_turret);
-turretNum--;
+global.turretNum++;
+}
+
 }
 
 
@@ -759,7 +768,10 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(obj_labUpgrCard)){
+            <string>
+
+
+if(instance_exists(obj_labUpgrCard)){
     if(global.scatterRank == 1){
     buildingGCost = 200;
     buildingECost = 125;
@@ -804,18 +816,30 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
         }
         }
 }
- 
+else{
+global.cant_afford = true;
+obj_HUDcontroller.alarm[0] = 40;
+}
 if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
         
+        if(global.turretCount &lt; 3){
         global.playerGold -= 250;
         //global.playerEnergy -= 100;
         alarm[2] = 5*30;
         }
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
         
         
-}   
-
+}
+else{
+global.cant_afford = true;   
+obj_HUDcontroller.alarm[0] = 40;
+}
 if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard3)){
         if(global.mvspdRank != 3){
@@ -831,7 +855,11 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
     }
         
         
-} 
+}
+else{
+global.cant_afford = true; 
+obj_HUDcontroller.alarm[0] = 40;
+}
 </string>
           </argument>
         </arguments>
@@ -854,7 +882,10 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_exists(obj_labUpgrCard)){
+            <string>
+
+
+if(instance_exists(obj_labUpgrCard)){
     if(global.orbRank == 1){
     buildingGCost = 200;
     buildingECost = 100;
@@ -913,7 +944,10 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
     }
         
 }
-
+else{
+global.cant_afford = true;
+obj_HUDcontroller.alarm[0] = 40;
+}
 if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard2)){
         if(global.shieldRank != 3){
@@ -928,7 +962,10 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
     }
         
 }
-
+else{
+global.cant_afford = true;
+obj_HUDcontroller.alarm[0] = 40;
+}
 if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard3)){
         if(global.maxHPRank != 3){
@@ -942,6 +979,10 @@ if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= bu
         }
     }
         
+}
+else{
+global.cant_afford = true;
+obj_HUDcontroller.alarm[0] = 40;
 }
 </string>
           </argument>

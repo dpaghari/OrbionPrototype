@@ -73,11 +73,12 @@ hp = maxhp;
           <argument>
             <kind>1</kind>
             <string>if (hp &lt; 0){
+    global.turretNum--;
     instance_destroy();
 }
 
 
-cooldown = .5*room_speed;
+cooldown = 1*room_speed;
 if (alarm[0] &lt;= 0){
     var target = instance_nearest(x, y, obj_enemy);
     var bulletSpeed = 10;
