@@ -288,7 +288,7 @@ draw_text(player.x - 60, player.y - 200, "You are DEAD");
 if(global.cant_afford)
 {
 draw_set_color(c_white);
-draw_text(view_xview + 400, view_yview + 400, "You have not enough Resources");
+draw_text(view_xview + 400, view_yview + 100, "You have not enough Resources");
 }
 
 

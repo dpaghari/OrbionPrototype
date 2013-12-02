@@ -398,14 +398,9 @@
     <instance objName="obj_drill" x="224" y="160" name="inst_836054F2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_oilwell" x="672" y="928" name="inst_E1A439B3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_HUDcontroller" x="0" y="0" name="inst_5C8B3124" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-<<<<<<< HEAD
-    <instance objName="obj_enemy" x="1856" y="1408" name="inst_095CD436" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_enemy" x="1856" y="64" name="inst_8BEC1EB6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-=======
->>>>>>> 6fc89077c64e7730b61b4457d493bd94a8c2bc5c
-    <instance objName="obj_spawner" x="32" y="0" name="inst_F8E0B454" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="2624" y="1984" name="inst_E2FDD5EF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_enemy" x="2688" y="864" name="inst_F226F53A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_spawner" x="2656" y="2272" name="inst_B8F30629" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
