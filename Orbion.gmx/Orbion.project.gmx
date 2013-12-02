@@ -10,6 +10,7 @@
     <sprite>sprites\generator</sprite>
     <sprite>sprites\medbay</sprite>
     <sprite>sprites\bullet</sprite>
+    <sprite>sprites\turr_bullet</sprite>
     <sprite>sprites\spr_enemy_bullet</sprite>
     <sprites name="player">
       <sprite>sprites\player_spr</sprite>
@@ -42,7 +43,7 @@
     <sprite>sprites\spr_turret</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\terrain</background>
+    <background>background\background1</background>
   </backgrounds>
   <paths name="paths"/>
   <fonts name="fonts">
@@ -56,6 +57,7 @@
     <object>objects\obj_deflab</object>
     <object>objects\obj_dnalab</object>
     <object>objects\obj_bullet</object>
+    <object>objects\obj_turrBullet</object>
     <object>objects\obj_orbShot</object>
     <object>objects\obj_enemy_bullet</object>
     <object>objects\obj_HUDcontroller</object>
@@ -64,6 +66,7 @@
     <object>objects\obj_labUpgrCard</object>
     <object>objects\obj_labUpgrCard2</object>
     <object>objects\obj_labUpgrCard3</object>
+    <object>objects\obj_parent_upgrade</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_barrier</object>

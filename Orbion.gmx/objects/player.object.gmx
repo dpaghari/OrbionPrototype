@@ -28,6 +28,7 @@
             <string>global.playerHealth = 100;
 global.playerMaxHealth = 100;
 global.playerShields = 0;
+global.playerMaxShields = 100;
 global.playerAmmo = 10;
 global.isDead = false;
 global.playerBulPerShot = 1;
@@ -39,12 +40,28 @@ global.reloading = false;
 global.labUpgr_mode = false;
 global.labUpgr_mode2 = false;
 global.labUpgr_mode3 = false;
+
+buildingGCost = 0;
+buildingECost = 0;
+
 global.orbShot = false;
+
 global.orbRank = 0;
+global.scatterRank = 0;
+global.shieldRank = 0;
+global.mvspdRank = 0;
+global.maxHPRank = 0;
+
+global.maxRank = false;
+
+
+
+playerMvspd = 8;
+turretNum = 0;
 reloadTimer = 0;
 reloadTime = 60;
 shieldTimer = 0;
-shieldOn = false;
+global.shieldOn = false;
 res = 0;
 firingTimer = 0;
 rate = 5;
@@ -53,8 +70,157 @@ resource_timer = 0;
 facing = "down";
 
 //none, building, upgrading
-//global.state = none;
+global.state = 'none';
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.maxRank = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.maxHPRank &lt; 3 ){
+    global.playerMaxHealth += 100;  
+    global.playerHealth += 100;
+    global.maxHPRank++;
+}
+else{
+    global.maxHPRank = 3;
+}
+    
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.mvspdRank &lt; 3 ){
+    playerMvspd += 1.2;
+    global.mvspdRank++;
+}
+else{
+    global.mvspdRank = 3;
+}
+    
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(global.shieldRank &lt; 3 ){
+    global.shieldOn = true;
+    global.playerMaxShields += 100;
+    global.playerShields += 100;
+    global.shieldRank++;
+}
+else{
+    global.shieldRank = 3;
+}
+    
+
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>turretNum++;
 </string>
           </argument>
         </arguments>
@@ -108,7 +274,19 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.playerBulPerShot++;
+            <string>if(global.scatterRank &lt; 3 ){
+    global.playerBulPerShot++;
+    global.scatterRank++;
+}
+else{
+    global.scatterRank = 3;
+}
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -152,7 +330,7 @@ if(reloadTimer &gt; reloadTime)
     global.reloading = false;
 }
 //shield regen
-if(shieldOn &amp;&amp; global.playerShields &lt; 100){
+if(global.shieldOn &amp;&amp; global.playerShields &lt; global.playerMaxShields){
     shieldTimer++;
     if(shieldTimer &gt; 25){
         global.playerShields++;
@@ -266,11 +444,11 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x, player.y - 10)){
-    player.y -= 10;
+    player.y -= playerMvspd;
     player.sprite_index = player_runu;
     facing = "up";
     image_speed = 0.3;
-    view_yview -= 10;
+    view_yview -= playerMvspd;
     }
 }
 
@@ -304,11 +482,11 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x, player.y + 10)){
-    player.y += 10;   
+    player.y += playerMvspd;   
     player.sprite_index = player_rund;
     image_speed = 0.3;
     facing = "down";
-    view_yview += 10;
+    view_yview += playerMvspd;
     }
 }
 
@@ -342,12 +520,12 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x - 10, player.y)){
-    player.x += 10;
+    player.x += playerMvspd;
     player.sprite_index = player_runs;
     image_speed = 0.3;
     facing = "right";
     image_xscale = -1; 
-    view_xview += 10;
+    view_xview += playerMvspd;
     }
 }
 
@@ -381,12 +559,12 @@ if(global.playerShields &lt; damage){
             <string>if(!global.isDead)
 {
     if(place_free(player.x - 10, player.y)){
-        player.x -= 10;
+        player.x -= playerMvspd;
         player.sprite_index = player_runs;
         image_speed = 0.3;
         facing = "left";  
         image_xscale = 1; 
-        view_xview -= 10;
+        view_xview -= playerMvspd;
     }
     
 }
@@ -467,11 +645,12 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
                 {
                     if(!global.orbShot){
                     bull = instance_create(player.x, player.y, obj_bullet);
-                    
+                    bull.image_angle = shootAngle;
                     bull.speed = 20;
                     }
                     else{
                     bull = instance_create(player.x, player.y, obj_orbShot);
+                    bull.image_angle = shootAngle;
                     bull.speed = 10;
                     }
                     var angleOffset = playerMaxScatterAngle/2 - playerMaxScatterAngle/(global.playerBulPerShot + 1)*currBul;
@@ -503,6 +682,35 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
             }
 }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="84">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(turretNum &gt; 0){
+instance_create(player.x, player.y, obj_turret);
+turretNum--;
+}
+
+
+
 </string>
           </argument>
         </arguments>
@@ -551,30 +759,85 @@ global.reloading = true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
+            <string>if(instance_exists(obj_labUpgrCard)){
+    if(global.scatterRank == 1){
+    buildingGCost = 200;
+    buildingECost = 125;
+    }
+    if(global.scatterRank == 2){
+    buildingGCost = 250;
+    buildingECost = 150;
+    }
+    if(global.scatterRank == 3){
+    buildingGCost = 275;
+    buildingECost = 175;
+    }
+}
+if(instance_exists(obj_labUpgrCard3)){
+    if(global.mvspdRank == 1){
+    buildingGCost = 150;
+    buildingECost = 100;
+    }
+    if(global.mvspdRank == 2){
+    buildingGCost = 175;
+    buildingECost = 125;
+    }
+    if(global.mvspdRank == 3){
+    buildingGCost = 200;
+    buildingECost = 150;
+    }
 
+}
+
+
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
+    
     if( instance_exists (obj_labUpgrCard)){
-        global.playerGold -= 200;
-        global.playerEnergy -= 100;
+        if(global.scatterRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[0] = 5*30;
+        }
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
         }
 }
  
-if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
+if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
-        global.playerGold -= 150;
-        global.playerEnergy -= 150;
-        //alarm[1] = 30*5;
+        
+        global.playerGold -= 250;
+        //global.playerEnergy -= 100;
+        alarm[2] = 5*30;
         }
         
         
 }   
+
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
+    if( instance_exists (obj_labUpgrCard3)){
+        if(global.mvspdRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
+        alarm[4] = 5*30;
+        }
+        else
+        {
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
+        
+        
+} 
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="80">
+    <event eventtype="9" enumb="76">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -591,12 +854,8 @@ if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(player.x, player.y, obj_turret);
-
-
-
-
-
+            <string>global.playerShields = 200000;
+shieldOn = true;
 </string>
           </argument>
         </arguments>
@@ -619,27 +878,95 @@ if(global.playerGold &gt;= 150 &amp;&amp; global.playerEnergy &gt;= 150){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.playerGold &gt;= 200 &amp;&amp; global.playerEnergy &gt;= 100){
+            <string>if(instance_exists(obj_labUpgrCard)){
+    if(global.orbRank == 1){
+    buildingGCost = 200;
+    buildingECost = 100;
+    }
+    if(global.orbRank == 2){
+    buildingGCost = 250;
+    buildingECost = 125;
+    }
+    if(global.orbRank == 3){
+    buildingGCost = 275;
+    buildingECost = 150;
+    }
+}
+if(instance_exists(obj_labUpgrCard3)){
+    if(global.maxHPRank == 1){
+    buildingGCost = 150;
+    buildingECost = 150;
+    }
+    if(global.maxHPRank == 2){
+    buildingGCost = 175;
+    buildingECost = 175;
+    }
+    if(global.maxHPRank == 3){
+    buildingGCost = 200;
+    buildingECost = 200;
+    }
+}
+if(instance_exists(obj_labUpgrCard2)){    
+    if(global.shieldRank == 1){
+    buildingGCost = 250;
+    buildingECost = 125;
+    }
+    if(global.shieldRank == 2){
+    buildingGCost = 275;
+    buildingECost = 150;
+    }
+    if(global.shieldRank == 3){
+    buildingGCost = 300;
+    buildingECost = 175;
+    }
+
+}
+
+
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard)){
-        global.playerGold -= 200;
-        global.playerEnergy -= 100;
+        if(global.orbRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
         alarm[1] = 30*5;
         }
-        
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }   
+    }
         
 }
 
-if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
     if( instance_exists (obj_labUpgrCard2)){
-        global.playerGold -= 250;
-        global.playerEnergy -= 100;
-       // alarm[1] = 30*5;
+        if(global.shieldRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 100;
+        alarm[3] = 30*5;
         }
-        
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
         
 }
 
-
+if(global.playerGold &gt;= buildingGCost &amp;&amp; global.playerEnergy &gt;= buildingECost){
+    if( instance_exists (obj_labUpgrCard3)){
+        if(global.maxHPRank != 3){
+        global.playerGold -= buildingGCost;
+        //global.playerEnergy -= 150;
+        alarm[5] = 30*5;
+        }
+        else{
+        global.maxRank = true;
+        alarm[9] = 1*30;
+        }
+    }
+        
+}
 </string>
           </argument>
         </arguments>
@@ -662,64 +989,58 @@ if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>//global.state = none, building, upgrading
 
-upgrCardOff = false;
-
-if (instance_exists (obj_lab)){
-    if (obj_lab.inProximity){
-        global.labUpgr_mode = !global.labUpgr_mode;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard); 
-    }
-    else{
-        global.labUpgr_mode = false;
-    }
-}
-if (instance_exists (obj_deflab)){
-    if (obj_deflab.inProximity){
-        global.labUpgr_mode2 = !global.labUpgr_mode2;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard2); 
-    }
-    else{
-        global.labUpgr_mode2 = false;
-    }
-}
-if (instance_exists (obj_dnalab)){
-    if (obj_dnalab.inProximity){
-        global.labUpgr_mode3 = !global.labUpgr_mode3;
-        instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard3); 
-    }
-    else{
-        global.labUpgr_mode3 = false;
-    }
-}
-
-if (!global.labUpgr_mode &amp;&amp; !upgrCardOff)
+//If building or upgrading
+if(global.state == 'building' || global.state == 'upgrading')
 {
-    //global.labUpgr_mode = false;
-    global.build_mode = not global.build_mode;
-    
-    if(global.build_mode){    
-        instance_create(view_xview, view_yview, obj_buildcard); 
+    //if building remove buildcard
+    if(instance_exists(obj_buildcard))
+    {
+        with(obj_buildcard)
+        {
+        instance_destroy();
+        }
+        global.state = 'none';                                
     }
-}
-if(!global.labUpgr_mode2 &amp;&amp; upgrCardOff)
-{
-//global.labUpgr_mode2 = false;
-}
-
-
-/*
-if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
-{
-    global.labUpgr_mode2 = false;
-    global.build_mode = not global.build_mode;
-    
-    if(global.build_mode){    
-        instance_create(view_xview, view_yview, obj_buildcard); 
+    //if upgrading remove upgradecard
+    if(instance_exists(obj_parent_upgrade))
+    {
+        with(obj_parent_upgrade)
+        {
+        instance_destroy();
+        }
+        global.state = 'none';                        
     }
-}
-*/
+//if state = none
+} else {
+    //In range of building -&gt; open upgrade
+    if (instance_exists (obj_lab)){
+        if (obj_lab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard);
+            global.state = 'upgrading';
+        }
+    }
+    if (instance_exists (obj_deflab)){
+        if (obj_deflab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard2);
+            global.state = 'upgrading'; 
+        }
+    }
+    if (instance_exists (obj_dnalab)){
+        if (obj_dnalab.inProximity){
+            instance_create(view_xview - 200, view_yview + 250, obj_labUpgrCard3);
+            global.state = 'upgrading'; 
+        }
+    }
+    //else open buildcard
+    if (global.state != 'upgrading')
+    {
+        instance_create(view_xview, view_yview, obj_buildcard);
+        global.state = 'building'; 
+    }
+}//end of else
+
 
 
 </string>
@@ -744,22 +1065,20 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode)
+            <string>if(global.state == 'building') 
 {
-    if(!instance_exists(obj_medbay)){
-    if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
+    if(global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_medbay))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 30;
+        //global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_medbay);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
         global.cant_afford = true;
         obj_HUDcontroller.alarm[0] = 40;
-    }
     }
 }
 
@@ -788,21 +1107,20 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode)
+            <string>if(global.state == 'building') 
 {
     if(global.playerGold &gt;= 50)
     {
         global.playerGold -= 50;
         instance_create(player.x, player.y, obj_generator);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
         global.cant_afford = true;
         obj_HUDcontroller.alarm[0] = 40;
-    }
-    
+    } 
 }
 
 
@@ -831,15 +1149,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building')  
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_dnalab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 50;
+        //global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_dnalab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
@@ -873,7 +1191,7 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building') 
 {
     if (instance_exists (obj_oilwell)){
         var anOilWell = instance_nearest(player.x, player.y, obj_oilwell);
@@ -883,8 +1201,8 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
                 global.playerGold -= 100;
                 instance_create(anOilWell.x, anOilWell.y, obj_drill);
                 with(anOilWell){instance_destroy()}
-                global.build_mode = false;
                 global.cant_afford = false;
+                global.state = 'none';
             }
             else
             {
@@ -920,15 +1238,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building')  
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 30 &amp;&amp; !instance_exists(obj_deflab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 30;
+        //global.playerEnergy -= 30;
         instance_create(player.x, player.y, obj_deflab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
@@ -962,15 +1280,15 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.build_mode) 
+            <string>if(global.state == 'building') 
 {
-    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50)
+    if( global.playerGold &gt;= 100 &amp;&amp; global.playerEnergy &gt;= 50 &amp;&amp; !instance_exists(obj_lab))
     {
         global.playerGold -= 100;
-        global.playerEnergy -= 50;
+        //global.playerEnergy -= 50;
         instance_create(player.x, player.y, obj_lab);
-        global.build_mode = false;
         global.cant_afford = false;
+        global.state = 'none';
     }
     else
     {
@@ -982,31 +1300,6 @@ if (!global.labUpgr_mode2 &amp;&amp; !upgrCardOff)
 
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="48">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-global.playerShields = 20;
-shieldOn = true;
 </string>
           </argument>
         </arguments>
