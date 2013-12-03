@@ -3,7 +3,7 @@
   <spriteName>player_spr</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>1000</depth>
+  <depth>998</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -41,11 +41,14 @@ global.labUpgr_mode = false;
 global.labUpgr_mode2 = false;
 global.labUpgr_mode3 = false;
 
+global.introUI = true;
+obj_HUDcontroller.alarm[3] = 100;
+
 buildingGCost = 0;
 buildingECost = 0;
 global.orbShot = false;
 
-global.orbRank = 1;
+global.orbRank = 0;
 global.scatterRank = 0;
 global.shieldRank = 0;
 global.mvspdRank = 0;
@@ -56,6 +59,7 @@ global.maxRank = false;
 
 
 playerMvspd = 8;
+global.turretOn = false;
 global.turretMax = 0;
 global.turretCount = 0;
 reloadTimer = 0;
@@ -223,7 +227,8 @@ else{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.turretOn = true;
+            <string>global.turretMax += 1;
+global.turretOn = true;
 </string>
           </argument>
         </arguments>
@@ -710,11 +715,13 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.turretCount &gt; 0 &amp;&amp; global.turretMax &lt; 3){
-instance_create(player.x, player.y, obj_turret);
-global.turretMax++;
+            <string>if(global.turretOn){
+    
+    if(global.turretCount &lt; global.turretMax){
+    instance_create(player.x, player.y, obj_turret);
+    global.turretCount++;
+    }  
 }
-
 
 
 
@@ -821,11 +828,11 @@ obj_HUDcontroller.alarm[0] = 40;
 if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
     if( instance_exists (obj_labUpgrCard2)){
         
-        if(global.turretCount &lt; 3){
+        if(global.turretMax &lt; 3){
         global.playerGold -= 250;
         //global.playerEnergy -= 100;
         alarm[2] = 5*30;
-        global.turretCount += 1;
+        
         }
         else{
         global.maxRank = true;
