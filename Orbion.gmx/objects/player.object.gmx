@@ -56,8 +56,8 @@ global.maxRank = false;
 
 
 playerMvspd = 8;
-global.turretOn = false;
-global.turretNum = 0;
+global.turretMax = 0;
+global.turretCount = 0;
 reloadTimer = 0;
 reloadTime = 60;
 shieldTimer = 0;
@@ -710,13 +710,11 @@ if (firingTimer &gt; rate &amp;&amp; global.playerAmmo &gt; 0)                 /
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(global.turretOn){
-if(global.turretNum &lt; 3){
+            <string>if(global.turretCount &gt; 0 &amp;&amp; global.turretMax &lt; 3){
 instance_create(player.x, player.y, obj_turret);
-global.turretNum++;
+global.turretMax++;
 }
 
-}
 
 
 
@@ -827,6 +825,7 @@ if(global.playerGold &gt;= 250 &amp;&amp; global.playerEnergy &gt;= 100){
         global.playerGold -= 250;
         //global.playerEnergy -= 100;
         alarm[2] = 5*30;
+        global.turretCount += 1;
         }
         else{
         global.maxRank = true;
